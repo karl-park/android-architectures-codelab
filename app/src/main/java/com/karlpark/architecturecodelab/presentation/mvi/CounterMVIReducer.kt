@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class CounterMVIProcessor(
+class CounterMVIReducer(
     private val incrementUseCase: IncrementCounterUseCase,
     private val decrementUseCase: DecrementCounterUseCase,
     getCounterUseCase: GetCounterUseCase,
@@ -29,7 +29,6 @@ class CounterMVIProcessor(
                 is CounterIntent.Increment -> incrementUseCase(screen)
                 is CounterIntent.Decrement -> decrementUseCase(screen)
             }
-            // Reducer: computes and emits new state
             _state.value = currentState.copy(count = newCount)
         }
     }

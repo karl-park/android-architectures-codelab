@@ -10,24 +10,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.karlpark.architecturecodelab.di.ServiceLocator
-import com.karlpark.architecturecodelab.domain.CounterRepository
-import com.karlpark.architecturecodelab.domain.DecrementCounterUseCase
-import com.karlpark.architecturecodelab.domain.GetCounterUseCase
-import com.karlpark.architecturecodelab.domain.IncrementCounterUseCase
 import com.karlpark.architecturecodelab.presentation.CounterUI
 
 @Composable
 fun MvcCounterScreen() {
-    val repository = ServiceLocator.getService(CounterRepository::class.java)
     val controller = remember {
-        CounterController(
-            IncrementCounterUseCase(repository),
-            DecrementCounterUseCase(repository),
-            GetCounterUseCase(repository)
-        )
+        ServiceLocator.getService(CounterController::class.java)
     }
-
-    val count by controller.count // Observe the Controller's state
+    val count by controller.count
 
     Column(Modifier.padding(16.dp)) {
         Text("MVC Architecture", style = MaterialTheme.typography.bodyLarge)

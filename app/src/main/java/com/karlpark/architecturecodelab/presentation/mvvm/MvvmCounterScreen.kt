@@ -15,8 +15,7 @@ import com.karlpark.architecturecodelab.presentation.CounterUI
 
 @Composable
 fun MvvmCounterScreen() {
-    val viewModelFactory = ServiceLocator.getService(ViewModelProvider.Factory::class.java)
-    val viewModel: CounterMVVMViewModel = viewModel(factory = viewModelFactory)
+    val viewModel: CounterMVVMViewModel = viewModel(factory = ServiceLocator.getService(ViewModelProvider.Factory::class.java))
     val state by viewModel.state
 
     Column(modifier = Modifier.padding(16.dp)) {

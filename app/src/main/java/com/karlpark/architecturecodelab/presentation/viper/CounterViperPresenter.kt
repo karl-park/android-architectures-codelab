@@ -2,7 +2,7 @@ package com.karlpark.architecturecodelab.presentation.viper
 
 class CounterViperPresenter(
     private val interactor: CounterViperInteractor,
-    private val router: Any, // Mocked Router for navigation
+    private val router: Any,
     private val view: CounterViperPresenterOutput
 ) : CounterViperPresenterInput {
 

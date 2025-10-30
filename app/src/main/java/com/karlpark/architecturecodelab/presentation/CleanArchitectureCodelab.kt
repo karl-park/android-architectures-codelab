@@ -2,6 +2,7 @@ package com.karlpark.architecturecodelab.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -39,23 +40,25 @@ fun CleanArchitectureCodelab(
                 .padding(16.dp),
         ) {
             Row(
-                modifier = Modifier.padding(12.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier.fillMaxWidth().padding(8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Button(
-                    onClick = { currentScreenNumber = maxOf(1, currentScreenNumber - 1) },
-                    enabled = currentScreenNumber > 1
+                    onClick = { currentScreenNumber = maxOf(0, currentScreenNumber - 1) },
+                    enabled = currentScreenNumber > 0,
+                    contentPadding = PaddingValues(4.dp)
                 ) {
                     Text("Previous")
                 }
                 Text(
-                    "Architecture Demo ${currentScreenNumber}/${screenCount}",
+                    "Architecture Demo ${currentScreenNumber + 1}/${screenCount}",
                     fontWeight = FontWeight.Bold
                 )
                 Button(
                     onClick = { currentScreenNumber = minOf(screenCount, currentScreenNumber + 1) },
-                    enabled = currentScreenNumber < screenCount
+                    enabled = currentScreenNumber < screenCount - 1,
+                    contentPadding = PaddingValues(4.dp)
                 ) {
                     Text("Next")
                 }
@@ -63,11 +66,11 @@ fun CleanArchitectureCodelab(
         }
 
         when (currentScreenNumber) {
-            1 -> MvvmCounterScreen()
-            2 -> MviCounterScreen()
-            3 -> MvpCounterScreen()
-            4 -> MvcCounterScreen()
-            5 -> ViperCounterScreen()
+            Screen.MVVM.ordinal -> MvvmCounterScreen()
+            Screen.MVI.ordinal -> MviCounterScreen()
+            Screen.MVP.ordinal -> MvpCounterScreen()
+            Screen.MVC.ordinal -> MvcCounterScreen()
+            Screen.VIPER.ordinal -> ViperCounterScreen()
         }
     }
 }

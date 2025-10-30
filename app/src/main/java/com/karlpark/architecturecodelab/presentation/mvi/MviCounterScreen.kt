@@ -13,12 +13,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.karlpark.architecturecodelab.di.ServiceLocator
 import com.karlpark.architecturecodelab.presentation.CounterUI
-import com.karlpark.architecturecodelab.presentation.mvi.CounterMVIProcessor
 
 @Composable
 fun MviCounterScreen() {
-    val viewModelFactory = ServiceLocator.getService(ViewModelProvider.Factory::class.java)
-    val processor: CounterMVIProcessor = viewModel(factory = viewModelFactory)
+    val processor: CounterMVIReducer = viewModel(factory = ServiceLocator.getService(ViewModelProvider.Factory::class.java))
     val state by processor.state.collectAsStateWithLifecycle()
 
     Column(Modifier.padding(16.dp)) {

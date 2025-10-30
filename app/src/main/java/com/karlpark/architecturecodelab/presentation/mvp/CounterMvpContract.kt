@@ -2,7 +2,7 @@ package com.karlpark.architecturecodelab.presentation.mvp
 
 interface CounterMvpContract {
     interface View {
-        fun displayCount(count: Int) // Passive View: Presenter tells it exactly what to show
+        fun displayCount(count: Int)
     }
 
     interface Presenter {

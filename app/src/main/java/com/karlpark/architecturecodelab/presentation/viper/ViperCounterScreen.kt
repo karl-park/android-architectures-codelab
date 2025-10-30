@@ -11,24 +11,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.karlpark.architecturecodelab.di.ServiceLocator
-import com.karlpark.architecturecodelab.domain.CounterRepository
-import com.karlpark.architecturecodelab.domain.DecrementCounterUseCase
-import com.karlpark.architecturecodelab.domain.GetCounterUseCase
-import com.karlpark.architecturecodelab.domain.IncrementCounterUseCase
 import com.karlpark.architecturecodelab.presentation.CounterUI
 
 @Composable
 fun ViperCounterScreen() {
-    val repository = ServiceLocator.getService(CounterRepository::class.java)
     val interactor = remember {
-        CounterViperInteractor(
-            IncrementCounterUseCase(repository),
-            DecrementCounterUseCase(repository),
-            GetCounterUseCase(repository)
-        )
+        ServiceLocator.getService(CounterViperInteractor::class.java)
     }
 
-    val countState = remember { mutableIntStateOf(interactor.getCount()) }
+    val countState = remember { mutableIntStateOf(0) }
     val viewOutput = remember {
         object : CounterViperPresenterOutput {
             override fun displayCount(count: Int) {
